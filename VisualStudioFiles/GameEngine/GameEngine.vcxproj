@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D54F7917-C107-BB64-2A0F-94C016E65555}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>GameEngine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\OutputOfAll\</OutDir>
+    <IntDir>..\bin-int\Debug-windows-x86_64\GameEngine\</IntDir>
+    <TargetName>GameEngine</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\OutputOfAll\</OutDir>
+    <IntDir>..\bin-int\Release-windows-x86_64\GameEngine\</IntDir>
+    <TargetName>GameEngine</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>SORA_PLATFORM_WINDOWS;_WINDLL;SORA_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\vendors\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc142-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\vendors\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>SORA_PLATFORM_WINDOWS;_WINDLL;SORA_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\vendors\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc142-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\vendors\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="src\HelpHeaders\Component.h" />
+    <ClInclude Include="src\HelpHeaders\Components\Camera.h" />
+    <ClInclude Include="src\HelpHeaders\Components\Input.h" />
+    <ClInclude Include="src\HelpHeaders\Components\MeshData.h" />
+    <ClInclude Include="src\HelpHeaders\Components\ParentChild.h" />
+    <ClInclude Include="src\HelpHeaders\Components\Particle.h" />
+    <ClInclude Include="src\HelpHeaders\Components\ParticleGroup.h" />
+    <ClInclude Include="src\HelpHeaders\Components\Shader.h" />
+    <ClInclude Include="src\HelpHeaders\Components\Transform.h" />
+    <ClInclude Include="src\HelpHeaders\EditorGuiVars.h" />
+    <ClInclude Include="src\HelpHeaders\EngineCoreDefs.h" />
+    <ClInclude Include="src\HelpHeaders\EngineHeaders.h" />
+    <ClInclude Include="src\HelpHeaders\EntityTabler.h" />
+    <ClInclude Include="src\HelpHeaders\ExternalFuncs.h" />
+    <ClInclude Include="src\HelpHeaders\Light\DirectionalLight.h" />
+    <ClInclude Include="src\HelpHeaders\Light\PointLight.h" />
+    <ClInclude Include="src\HelpHeaders\Light\SpotLight.h" />
+    <ClInclude Include="src\HelpHeaders\OpenGlWindowCreator.h" />
+    <ClInclude Include="src\HelpHeaders\RandomNumber.h" />
+    <ClInclude Include="src\HelpHeaders\RandomProps.h" />
+    <ClInclude Include="src\HelpHeaders\SceneManager.h" />
+    <ClInclude Include="src\HelpHeaders\SerializationUtils.h" />
+    <ClInclude Include="src\HelpHeaders\ShaderUtils.h" />
+    <ClInclude Include="src\HelpHeaders\SoraApplication.h" />
+    <ClInclude Include="src\HelpHeaders\SparseOctree.h" />
+    <ClInclude Include="src\HelpHeaders\Systems\CameraHandelingSystem.h" />
+    <ClInclude Include="src\HelpHeaders\Systems\ExitToApplicationSystem.h" />
+    <ClInclude Include="src\HelpHeaders\Systems\ImguiUISystem.h" />
+    <ClInclude Include="src\HelpHeaders\Systems\InputHandlingSystem.h" />
+    <ClInclude Include="src\HelpHeaders\Systems\MeshLoadingSystem.h" />
+    <ClInclude Include="src\HelpHeaders\Systems\MeshRenderingSystem.h" />
+    <ClInclude Include="src\HelpHeaders\Systems\ParticlesManagerSystem.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\Systems\SerializationSystem.h" />
+    <ClInclude Include="src\HelpHeaders\Systems\ShaderPropertiesSystem.h" />
+    <ClInclude Include="src\HelpHeaders\Systems\WindowManagerSystem.h" />
+    <ClInclude Include="src\HelpHeaders\SystemsManager.h" />
+    <ClInclude Include="src\HelpHeaders\SystemsOrderManager.h" />
+    <ClInclude Include="src\HelpHeaders\TextureHandeling\Texture_H.h" />
+    <ClInclude Include="src\HelpHeaders\TextureHandeling\stb_image.h" />
+    <ClInclude Include="src\HelpHeaders\TimeVals.h" />
+    <ClInclude Include="src\HelpHeaders\UIUtils.h" />
+    <ClInclude Include="src\HelpHeaders\WindowProperties.h" />
+    <ClInclude Include="src\ImGUIStuff\imconfig.h" />
+    <ClInclude Include="src\ImGUIStuff\imgui.h" />
+    <ClInclude Include="src\ImGUIStuff\imgui_impl_glfw.h" />
+    <ClInclude Include="src\ImGUIStuff\imgui_impl_opengl3.h" />
+    <ClInclude Include="src\ImGUIStuff\imgui_internal.h" />
+    <ClInclude Include="src\ImGUIStuff\imgui_stdlib.h" />
+    <ClInclude Include="src\ImGUIStuff\imstb_rectpack.h" />
+    <ClInclude Include="src\ImGUIStuff\imstb_textedit.h" />
+    <ClInclude Include="src\ImGUIStuff\imstb_truetype.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\CPPFiles\Camera.cpp" />
+    <ClCompile Include="src\CPPFiles\Component.cpp" />
+    <ClCompile Include="src\CPPFiles\EntityTabler.cpp" />
+    <ClCompile Include="src\CPPFiles\Input.cpp" />
+    <ClCompile Include="src\CPPFiles\MeshData.cpp" />
+    <ClCompile Include="src\CPPFiles\OpenGLWindowCreator.cpp" />
+    <ClCompile Include="src\CPPFiles\RandomProps.cpp" />
+    <ClCompile Include="src\CPPFiles\SceneManager.cpp" />
+    <ClCompile Include="src\CPPFiles\SerializationUtils.cpp" />
+    <ClCompile Include="src\CPPFiles\ShaderUtils.cpp" />
+    <ClCompile Include="src\CPPFiles\SoraApplication.cpp" />
+    <ClCompile Include="src\CPPFiles\Systems\CameraHandelingSystem.cpp" />
+    <ClCompile Include="src\CPPFiles\Systems\ExitToApplicationSystem.cpp" />
+    <ClCompile Include="src\CPPFiles\Systems\ImguiUISystem.cpp" />
+    <ClCompile Include="src\CPPFiles\Systems\InputHandlingSystem.cpp" />
+    <ClCompile Include="src\CPPFiles\Systems\MeshLoadingSystem.cpp" />
+    <ClCompile Include="src\CPPFiles\Systems\MeshRenderingSystem.cpp" />
+    <ClCompile Include="src\CPPFiles\Systems\ParticlesManagerSystem.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\Systems\SerializationSystem.cpp" />
+    <ClCompile Include="src\CPPFiles\Systems\ShaderPropertiesManager.cpp" />
+    <ClCompile Include="src\CPPFiles\Systems\WindowManagerSystem.cpp" />
+    <ClCompile Include="src\CPPFiles\SystemsManager.cpp" />
+    <ClCompile Include="src\CPPFiles\SystemsOrderManager.cpp" />
+    <ClCompile Include="src\CPPFiles\Texture_H.cpp" />
+    <ClCompile Include="src\CPPFiles\TimeVals.cpp" />
+    <ClCompile Include="src\CPPFiles\Transform.cpp" />
+    <ClCompile Include="src\CPPFiles\WindowProperties.cpp" />
+    <ClCompile Include="src\HelpHeaders\Light\DirectionalLight.cpp" />
+    <ClCompile Include="src\HelpHeaders\Light\PointLight.cpp" />
+    <ClCompile Include="src\HelpHeaders\Light\SpotLight.cpp" />
+    <ClCompile Include="src\ImGUIStuff\imgui.cpp" />
+    <ClCompile Include="src\ImGUIStuff\imgui_demo.cpp" />
+    <ClCompile Include="src\ImGUIStuff\imgui_draw.cpp" />
+    <ClCompile Include="src\ImGUIStuff\imgui_impl_glfw.cpp" />
+    <ClCompile Include="src\ImGUIStuff\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\ImGUIStuff\imgui_stdlib.cpp" />
+    <ClCompile Include="src\ImGUIStuff\imgui_tables.cpp" />
+    <ClCompile Include="src\ImGUIStuff\imgui_widgets.cpp" />
+    <ClCompile Include="src\glad.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\ObjectShaders\TexturedLit\TexturedLit.frag" />
+    <None Include="src\ObjectShaders\TexturedLit\TexturedLit.vert" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

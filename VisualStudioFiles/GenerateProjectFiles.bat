@@ -1,0 +1,1 @@
+ZaPremakeBinFilesbinpremakepremake5.exe vs2019

@@ -1,0 +1,11 @@
+#pragma once
+#include "Components/Transform.h"
+#include "Components/Shader.h"
+#include "Components/Camera.h"
+#include "TextureHandeling/Texture_H.h"
+#include "Component.h"
+#include "Light/PointLight.h"
+#include "Light/DirectionalLight.h"
+#include "Light/SpotLight.h"
+#include "Components/Input.h"
+#include "TimeVals.h"

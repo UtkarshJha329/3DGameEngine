@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="CPPFiles">
+      <UniqueIdentifier>{7BCFEB1E-679C-462A-90B5-34D27CE17BB8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPPFiles\Systems">
+      <UniqueIdentifier>{8270EFE8-6E69-0E3B-979B-F3BF83F3ED46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{6B7DD516-5735-1764-C03C-F0BFAC13B254}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\CPPFiles">
+      <UniqueIdentifier>{700ACE75-DC6B-AB83-65D9-F135D139E242}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Headers">
+      <UniqueIdentifier>{16C72988-02AB-EADD-6B0B-E530570ED55F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelpHeaders">
+      <UniqueIdentifier>{6ACC0220-D681-7B15-5F76-75ECCB2A7219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelpHeaders\Components">
+      <UniqueIdentifier>{3FDB1C6B-2BD5-45BD-1442-DCCD00DBAB29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelpHeaders\Light">
+      <UniqueIdentifier>{9107C654-FD1D-C4EA-4695-4F0CB2EA9472}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelpHeaders\Systems">
+      <UniqueIdentifier>{71EC6FDF-DD4D-4DED-66BB-939FD21B84AC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelpHeaders\TextureHandeling">
+      <UniqueIdentifier>{74BB3263-6076-220F-092E-9B59F5C76C9F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGUIStuff">
+      <UniqueIdentifier>{88B86DBB-7470-AF08-DD77-8864C94E4AF9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{1DDE831B-89BD-02B7-92D5-8D8DFE336918}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\CPP">
+      <UniqueIdentifier>{0F926AD8-7B47-E3CD-043C-DDA470F0D9D1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\Header">
+      <UniqueIdentifier>{B5627255-A130-665B-8AC4-D681763142C0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\HelpHeaders\Component.h">
+      <Filter>HelpHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\Components\Camera.h">
+      <Filter>HelpHeaders\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\Components\Input.h">
+      <Filter>HelpHeaders\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\Components\MeshData.h">
+      <Filter>HelpHeaders\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\Components\Shader.h">
+      <Filter>HelpHeaders\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\Components\Transform.h">
+      <Filter>HelpHeaders\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\EngineCoreDefs.h">
+      <Filter>HelpHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\EngineHeaders.h">
+      <Filter>HelpHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\EntityTabler.h">
+      <Filter>HelpHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\ExternalFuncs.h">
+      <Filter>HelpHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\Light\DirectionalLight.h">
+      <Filter>HelpHeaders\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\Light\PointLight.h">
+      <Filter>HelpHeaders\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\Light\SpotLight.h">
+      <Filter>HelpHeaders\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\OpenGlWindowCreator.h">
+      <Filter>HelpHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\RandomProps.h">
+      <Filter>HelpHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\SerializationUtils.h">
+      <Filter>HelpHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\SoraApplication.h">
+      <Filter>HelpHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\Systems\CameraHandelingSystem.h">
+      <Filter>HelpHeaders\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\Systems\ExitToApplicationSystem.h">
+      <Filter>HelpHeaders\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\Systems\ImguiUISystem.h">
+      <Filter>HelpHeaders\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\Systems\InputHandlingSystem.h">
+      <Filter>HelpHeaders\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\Systems\MeshLoadingSystem.h">
+      <Filter>HelpHeaders\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\Systems\MeshRenderingSystem.h">
+      <Filter>HelpHeaders\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\Systems\SerializationSystem.h">
+      <Filter>HelpHeaders\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\Systems\ShaderPropertiesSystem.h">
+      <Filter>HelpHeaders\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\Systems\WindowManagerSystem.h">
+      <Filter>HelpHeaders\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\SystemsManager.h">
+      <Filter>HelpHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\SystemsOrderManager.h">
+      <Filter>HelpHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\TextureHandeling\Texture_H.h">
+      <Filter>HelpHeaders\TextureHandeling</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\TextureHandeling\stb_image.h">
+      <Filter>HelpHeaders\TextureHandeling</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\TimeVals.h">
+      <Filter>HelpHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\UIUtils.h">
+      <Filter>HelpHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\WindowProperties.h">
+      <Filter>HelpHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImGUIStuff\imconfig.h">
+      <Filter>ImGUIStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImGUIStuff\imgui.h">
+      <Filter>ImGUIStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImGUIStuff\imgui_impl_glfw.h">
+      <Filter>ImGUIStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImGUIStuff\imgui_impl_opengl3.h">
+      <Filter>ImGUIStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImGUIStuff\imgui_internal.h">
+      <Filter>ImGUIStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImGUIStuff\imgui_stdlib.h">
+      <Filter>ImGUIStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImGUIStuff\imstb_rectpack.h">
+      <Filter>ImGUIStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImGUIStuff\imstb_textedit.h">
+      <Filter>ImGUIStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImGUIStuff\imstb_truetype.h">
+      <Filter>ImGUIStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpHeaders\SceneManager.h" />
+    <ClInclude Include="src\HelpHeaders\SparseOctree.h" />
+    <ClInclude Include="src\HelpHeaders\Components\ParentChild.h" />
+    <ClInclude Include="src\HelpHeaders\ShaderUtils.h" />
+    <ClInclude Include="src\HelpHeaders\EditorGuiVars.h" />
+    <ClInclude Include="src\HelpHeaders\Components\Particle.h" />
+    <ClInclude Include="src\HelpHeaders\Components\ParticleGroup.h" />
+    <ClInclude Include="src\HelpHeaders\Systems\ParticlesManagerSystem.h" />
+    <ClInclude Include="src\HelpHeaders\RandomNumber.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\CPPFiles\Camera.cpp">
+      <Filter>CPPFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\Component.cpp">
+      <Filter>CPPFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\EntityTabler.cpp">
+      <Filter>CPPFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\Input.cpp">
+      <Filter>CPPFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\MeshData.cpp">
+      <Filter>CPPFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\OpenGLWindowCreator.cpp">
+      <Filter>CPPFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\RandomProps.cpp">
+      <Filter>CPPFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\SerializationUtils.cpp">
+      <Filter>CPPFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\SoraApplication.cpp">
+      <Filter>CPPFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\Systems\CameraHandelingSystem.cpp">
+      <Filter>CPPFiles\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\Systems\ExitToApplicationSystem.cpp">
+      <Filter>CPPFiles\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\Systems\ImguiUISystem.cpp">
+      <Filter>CPPFiles\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\Systems\InputHandlingSystem.cpp">
+      <Filter>CPPFiles\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\Systems\MeshLoadingSystem.cpp">
+      <Filter>CPPFiles\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\Systems\MeshRenderingSystem.cpp">
+      <Filter>CPPFiles\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\Systems\SerializationSystem.cpp">
+      <Filter>CPPFiles\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\Systems\ShaderPropertiesManager.cpp">
+      <Filter>CPPFiles\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\Systems\WindowManagerSystem.cpp">
+      <Filter>CPPFiles\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\SystemsManager.cpp">
+      <Filter>CPPFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\SystemsOrderManager.cpp">
+      <Filter>CPPFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\Texture_H.cpp">
+      <Filter>CPPFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\TimeVals.cpp">
+      <Filter>CPPFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\Transform.cpp">
+      <Filter>CPPFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPPFiles\WindowProperties.cpp">
+      <Filter>CPPFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HelpHeaders\Light\DirectionalLight.cpp">
+      <Filter>HelpHeaders\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HelpHeaders\Light\PointLight.cpp">
+      <Filter>HelpHeaders\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HelpHeaders\Light\SpotLight.cpp">
+      <Filter>HelpHeaders\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImGUIStuff\imgui.cpp">
+      <Filter>ImGUIStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImGUIStuff\imgui_demo.cpp">
+      <Filter>ImGUIStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImGUIStuff\imgui_draw.cpp">
+      <Filter>ImGUIStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImGUIStuff\imgui_impl_glfw.cpp">
+      <Filter>ImGUIStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImGUIStuff\imgui_impl_opengl3.cpp">
+      <Filter>ImGUIStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImGUIStuff\imgui_stdlib.cpp">
+      <Filter>ImGUIStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImGUIStuff\imgui_tables.cpp">
+      <Filter>ImGUIStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImGUIStuff\imgui_widgets.cpp">
+      <Filter>ImGUIStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="src\glad.c" />
+    <ClCompile Include="src\CPPFiles\SceneManager.cpp" />
+    <ClCompile Include="src\CPPFiles\ShaderUtils.cpp" />
+    <ClCompile Include="src\CPPFiles\Systems\ParticlesManagerSystem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\ObjectShaders\TexturedLit\TexturedLit.frag" />
+    <None Include="src\ObjectShaders\TexturedLit\TexturedLit.vert" />
+  </ItemGroup>
+</Project>
