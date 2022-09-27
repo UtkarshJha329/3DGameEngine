@@ -54,6 +54,7 @@ in mat4 camTransMat;
 in mat4 proj;
 
 in mat3 TBN;
+in vec3 norm;
 
 in vec3 FragPos;
 
@@ -116,22 +117,6 @@ void main()
 
 	if(calculateLightingAndNormals)
 	{
-
-		//vec3 norm = normalize(normal);
-		vec3 norm = (texture(mat.normalTex1, oTexCoord).rgb) * 2.0 - 1.0;
-		norm = (TBN * norm);
-
-		if(sqrt(norm.x * norm.x + norm.y * norm.y + norm.z * norm.z) > 1)
-		{
-			norm = normalize(norm);
-		}
-
-		if(dot(norm, normal) < 0){
-			norm *= -1;
-		}
-
-		//diffuseSample = norm;
-
 		for(int i = 0; i < NUM_DIR_LIGHTS; i++){
 			fragmentColour += CalcDirLight(dirLights[i], norm, viewDir, diffuseSample, specularSample, emissionSample);
 		}
@@ -144,7 +129,6 @@ void main()
 		for(int i = 0; i < NUM_SPOT_LIGHTS; i++){
 			fragmentColour += CalcSpotLight(spotLights[i], norm, viewDir, diffuseSample, specularSample, emissionSample);
 		}
-
 	}
 	else
 	{
@@ -153,6 +137,8 @@ void main()
 
 	fragmentColour = pow(fragmentColour, vec3(1.0/gamma));
 	FragColor = vec4(fragmentColour, 1.0);
+	//FragColor = vertColor;
+	//FragColor = vec4(norm, 1.0);
 
 	//float curEntityColour = (float)(curEntity) / (float)(totalEntities);
 	ColourBuffer = vec4(vec3(curEntity/totalEntities), 1.0);

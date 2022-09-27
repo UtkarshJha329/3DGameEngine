@@ -16,6 +16,7 @@ out mat4 camTransMat;
 out mat4 proj;
 
 out mat3 TBN;
+out vec3 norm;
 
 uniform mat4 transform;
 uniform mat4 cameraTransformMat;
@@ -31,15 +32,15 @@ void main()
 	
 
 	vec3 T = normalize(vec3(transform * vec4(aTangent, 0.0)));
-	vec3 N = -normalize(vec3(transform * vec4(aNormal, 0.0)));
+	vec3 N = normalize(vec3(transform * vec4(aNormal, 0.0)));
 	
 	
 	T = normalize(T - dot(T, N) * N);
 	
 	//vec3 B = normalize(cross(N, T));
 	vec3 B = normalize(vec3(transform * vec4(aBitangent, 0.0)));
-	
-	if(dot(cross(B, T), N) > 0){
+	//vec3 B = cross(N, T);
+	if(dot(cross(B, T), N) < 0){
 		T *= -1;
 	}
 
@@ -52,8 +53,9 @@ void main()
 	//}
 
 	TBN = mat3(T, B, N);
-
+	norm = N;
 
 	camTransMat = cameraTransformMat;
 	proj = projection;
+	vertColor = vec4(N, 1.0);
 }
