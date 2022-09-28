@@ -3,3 +3,5 @@ D:\GitKrakenRepos\GameEngineProject\VisualStudioFiles\OutputOfAll\GameEngine.pdb
 D:\GitKrakenRepos\GameEngineProject\VisualStudioFiles\bin-int\Debug-windows-x86_64\GameEngine\GameEngine.pdb
 D:\GitKrakenRepos\3DGameEngineProject\VisualStudioFiles\OutputOfAll\GameEngine.pdb
 D:\GitKrakenRepos\3DGameEngineProject\VisualStudioFiles\bin-int\Debug-windows-x86_64\GameEngine\GameEngine.pdb
+D:\GitKrakenRepos\3DGameEngine\VisualStudioFiles\OutputOfAll\GameEngine.pdb
+D:\GitKrakenRepos\3DGameEngine\VisualStudioFiles\bin-int\Debug-windows-x86_64\GameEngine\GameEngine.pdb

@@ -209,8 +209,8 @@ void ImguiUISystem::PrepareImguiFrame() {
 
 			#pragma region ScenePanel
 			{
-				ImGui::Begin("Scene");
 				auto viewportOffset = ImGui::GetCursorPos();
+				ImGui::Begin("Scene");
 
 				auto windowSize = ImGui::GetWindowSize();
 				ImVec2 minBound = ImGui::GetWindowPos();
@@ -231,7 +231,7 @@ void ImguiUISystem::PrepareImguiFrame() {
 				my = s_viewportSize.y - my;
 
 				int mouseX = (int)mx;
-				int mouseY = (int)my;
+				int mouseY = (int)my - 36;
 
 				//std::cout << mouseX << " : " << mouseY << std::endl;
 				CameraComponent* mainCam = curScene->GetCompOfEntity<CameraComponent>(CameraComponent::mainCameraEntity);
@@ -341,21 +341,21 @@ void ImguiUISystem::PrepareImguiFrame() {
 
 			#pragma endregion
 
-			//{
-			//	ImGui::Begin("ColourTexture");
+			{
+				ImGui::Begin("ColourTexture");
 
-			//	ImVec2 viewportSize = ImGui::GetContentRegionAvail();
-			//	if (WindowProperties::instance->viewportSize.x != viewportSize.x
-			//		|| WindowProperties::instance->viewportSize.y != viewportSize.y) {
+				ImVec2 viewportSize = ImGui::GetContentRegionAvail();
+				if (WindowProperties::instance->viewportSize.x != viewportSize.x
+					|| WindowProperties::instance->viewportSize.y != viewportSize.y) {
 
-			//		WindowProperties::instance->viewportSize = { viewportSize.x, viewportSize.y };
-			//		WindowProperties::instance->viewportResized = true;
-			//	}
-			//	//std::cout << ImGui::GetMousePos().x << " : " << ImGui::GetMousePos().y << std::endl;
-			//	
-			//	ImGui::Image((void*)mainCam->entityColourTextureID, { viewportSize.x, viewportSize.y }, ImVec2(0, 1), ImVec2(1, 0));
-			//	ImGui::End();
-			//}
+					WindowProperties::instance->viewportSize = { viewportSize.x, viewportSize.y };
+					WindowProperties::instance->viewportResized = true;
+				}
+				//std::cout << ImGui::GetMousePos().x << " : " << ImGui::GetMousePos().y << std::endl;
+				
+				ImGui::Image((void*)mainCam->entityColourTextureID, { viewportSize.x, viewportSize.y }, ImVec2(0, 1), ImVec2(1, 0));
+				ImGui::End();
+			}
 		}
 	}
 }

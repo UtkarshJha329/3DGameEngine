@@ -156,6 +156,8 @@ void MeshLoadingSystem::ProcessNode(const aiScene* scene, unsigned int curMeshEn
 	auto meshSet = curScene->GetCompSparseSet<MeshData>();
 	//std::cout << "FIRST : " << curMeshDir << std::endl;
 
+	ParentChild* parent = curScene->GetCompOfEntity<ParentChild>(curMeshEntity);
+	parent->childrenEntity.clear();
 
 	for (unsigned int i = 0; i < scene->mNumMeshes; i++)
 	{
@@ -167,7 +169,7 @@ void MeshLoadingSystem::ProcessNode(const aiScene* scene, unsigned int curMeshEn
 		child->parEntity = curShader->pairedEntity;
 		child->currentEntity = meshEntityID;
 		child->codedHierarchy = 1;
-		ParentChild* parent = curScene->GetCompOfEntity<ParentChild>(curShader->pairedEntity);
+		ParentChild* parent = curScene->GetCompOfEntity<ParentChild>(curMeshEntity);
 		parent->childrenEntity.push_back(meshEntityID);
 		parent->codedHierarchy = 1;
 		//transSet->Add(meshEntityID);

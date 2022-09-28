@@ -24,9 +24,11 @@ void CameraHandelingSystem::Update() {
 
 		SetCameraFrameBuffers(WindowProperties::instance->viewportSize.x, WindowProperties::instance->viewportSize.y);
 		WindowProperties::instance->viewportResized = false;
+
 	}
 
 	UpdateCameraProjection();
+
 }
 
 void CameraHandelingSystem::LateUpdate() {
@@ -46,7 +48,7 @@ void CameraHandelingSystem::UpdateCameraProjection() {
 		CameraComponent* curComp = &camSet->denseTArray[i];
 
 		CameraComponent::ProjectionType UIVal = (CameraComponent::ProjectionType)curComp->projectionValue;
-
+		
 		if (UIVal != curComp->projectionType) {
 
 			curComp->projectionType = UIVal;

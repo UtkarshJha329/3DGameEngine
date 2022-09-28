@@ -36,7 +36,6 @@ public:
 			if (strcmp(curLine.c_str(), "") == 0) {
 				break;
 			}
-			
 			LoadStringsIntoMap(&curLine);
 		}
 	}

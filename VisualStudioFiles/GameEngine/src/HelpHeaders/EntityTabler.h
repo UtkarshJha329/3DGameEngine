@@ -138,6 +138,7 @@ public:
 			denseIndexArray.emplace_back(spID);
 			serializable.emplace_back(_serializable);
 			denseTArray.back().pairedEntity = spID;
+			//std::cout << "ADDED NEW COMP FOR ENTITY : " << spID << std::endl;
 		}
 		aprntDenseSize++;
 	}
