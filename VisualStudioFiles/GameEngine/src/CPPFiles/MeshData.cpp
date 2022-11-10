@@ -24,12 +24,11 @@ void MeshData::SerializeComponent()
 void MeshData::DeSerializeComponent()
 {
 	DSFstrs(&meshPath);
+	//DSFVecIntsT(1, vertices);
 }
 
 void MeshData::UIfyComponent()
 {
 	UIfyString(meshPath);
-
-	bool sideLoaded = sideloadedMesh;
-	UIfyBool(sideLoaded);
+	UIfyString(meshName);
 }

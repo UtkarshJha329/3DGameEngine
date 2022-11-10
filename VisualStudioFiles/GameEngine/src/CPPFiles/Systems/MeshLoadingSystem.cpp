@@ -37,10 +37,7 @@ void MeshLoadingSystem::Awake()
 		InitShader(curShader, "Assets/ObjectShaders/TexturedLit/TexturedLit.vert", "Assets/ObjectShaders/TexturedLit/TexturedLit.frag");
 		curShader->shadNum = ShaderNumber::TexturedLit;
 
-		if (!curMesh->sideloadedMesh)
-		{
-			LoadModel(curMDSet->denseTArray[i].pairedEntity, curShader);
-		}
+		LoadModel(curMDSet->denseTArray[i].pairedEntity, curShader);
 	}
 
 	RandomProps::particleEntity = curScene->sceneTabler.entity_Set.NewEntity(false);
@@ -133,7 +130,7 @@ void MeshLoadingSystem::LoadModel(unsigned int curMeshEntity, Shader* curShader)
 {
 	Assimp::Importer importer;
 	MeshData* curMesh = curScene->GetCompOfEntity<MeshData>(curMeshEntity);
-	const aiScene* scene = importer.ReadFile(curMesh->meshPath, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+	const aiScene* scene = importer.ReadFile(curMesh->meshPath, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace | aiProcess_GenBoundingBoxes);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
 
@@ -177,7 +174,6 @@ void MeshLoadingSystem::ProcessNode(const aiScene* scene, unsigned int curMeshEn
 
 		aiMesh* mesh = scene->mMeshes[i];
 
-		meshSet->denseTArray[meshSet->sparse_Indecies[meshEntityID]].sideloadedMesh = true;
 		MeshData* curMesh = curScene->GetCompOfEntity<MeshData>(curMeshEntity);
 		curMesh->meshEntities.push_back(meshEntityID);
 		//std::cout << "SECOND : " << curMeshDir << std::endl;
@@ -279,8 +275,18 @@ void MeshLoadingSystem::ProcessMesh(aiMesh* mesh, const aiScene* scene, unsigned
 
 	MeshData* meshN = curScene->GetCompOfEntity<MeshData>(meshEntity);
 	//meshN->vertices.reserve(mesh->mNumVertices * 11);
-#define vertexArray meshN->vertices
-//std::vector<float> vertexArray;
+	#define vertexArray meshN->vertices
+	//std::vector<float> vertexArray;
+
+	//std::cout << "Max : " << mesh->mAABB.mMax.x << " : " << mesh->mAABB.mMax.y << " : " << mesh->mAABB.mMax.z << std::endl;
+	//std::cout << "Min : " << mesh->mAABB.mMin.x << " : " << mesh->mAABB.mMin.y << " : " << mesh->mAABB.mMin.z << std::endl;
+	
+	meshN->aabb.max.x = mesh->mAABB.mMax.x;
+	meshN->aabb.max.y = mesh->mAABB.mMax.y;
+	meshN->aabb.max.z = mesh->mAABB.mMax.z;
+	meshN->aabb.min.x = mesh->mAABB.mMin.x;
+	meshN->aabb.min.y = mesh->mAABB.mMin.y;
+	meshN->aabb.min.z = mesh->mAABB.mMin.z;
 
 	int texCoordIndex = -1;
 	bool found = false;
@@ -361,6 +367,9 @@ void MeshLoadingSystem::ProcessMesh(aiMesh* mesh, const aiScene* scene, unsigned
 	meshN->numVertices = vertexArray.size();
 
 	MeshLoadingSystem::GenerateABOs(meshN, MeshData::stride * (*mesh).mNumVertices, curShader);
+
+	//std::cout << mesh->mName.C_Str() << std::endl;
+	meshN->meshName = mesh->mName.C_Str();
 }
 
 

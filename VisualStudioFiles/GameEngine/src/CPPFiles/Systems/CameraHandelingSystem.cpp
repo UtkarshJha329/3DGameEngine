@@ -25,10 +25,8 @@ void CameraHandelingSystem::Update() {
 		SetCameraFrameBuffers(WindowProperties::instance->viewportSize.x, WindowProperties::instance->viewportSize.y);
 		WindowProperties::instance->viewportResized = false;
 
+		UpdateCameraProjection();
 	}
-
-	UpdateCameraProjection();
-
 }
 
 void CameraHandelingSystem::LateUpdate() {

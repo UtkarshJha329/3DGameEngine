@@ -286,6 +286,7 @@ void MeshRenderingSystem::DrawMeshTotal(MeshData* curMeshData, Shader* curShader
 	for (unsigned int i = 0; i < curMeshData->meshEntities.size(); i++)
 	{
 		MeshData* curMesh = curScene->GetCompOfEntity<MeshData>(curMeshData->meshEntities[i]);
+
 		if (entity == -1) {
 			setUFloat(curShader, "curEntity", (float)curMesh->pairedEntity);
 		}

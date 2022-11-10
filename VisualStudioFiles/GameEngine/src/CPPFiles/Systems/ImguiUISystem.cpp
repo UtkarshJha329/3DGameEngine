@@ -258,10 +258,20 @@ void ImguiUISystem::PrepareImguiFrame() {
 
 					WindowProperties::instance->viewportSize = { viewportSize.x, viewportSize.y };
 					WindowProperties::instance->viewportResized = true;
+					std::cout << "WINDOW RESIZED." << std::endl;
 				}
 
 				ImGui::Image((void*)mainCam->renderTextureID, { viewportSize.x, viewportSize.y }, ImVec2(0, 1), ImVec2(1, 0));
 				ImGui::End();
+
+
+				{
+					ImGui::Begin("ColourTexture");
+
+					ImGui::Image((void*)mainCam->entityColourTextureID, { viewportSize.x, viewportSize.y }, ImVec2(0, 1), ImVec2(1, 0));
+					ImGui::End();
+				}
+
 			}
 			#pragma endregion
 
@@ -340,22 +350,6 @@ void ImguiUISystem::PrepareImguiFrame() {
 			}
 
 			#pragma endregion
-
-			{
-				ImGui::Begin("ColourTexture");
-
-				ImVec2 viewportSize = ImGui::GetContentRegionAvail();
-				if (WindowProperties::instance->viewportSize.x != viewportSize.x
-					|| WindowProperties::instance->viewportSize.y != viewportSize.y) {
-
-					WindowProperties::instance->viewportSize = { viewportSize.x, viewportSize.y };
-					WindowProperties::instance->viewportResized = true;
-				}
-				//std::cout << ImGui::GetMousePos().x << " : " << ImGui::GetMousePos().y << std::endl;
-				
-				ImGui::Image((void*)mainCam->entityColourTextureID, { viewportSize.x, viewportSize.y }, ImVec2(0, 1), ImVec2(1, 0));
-				ImGui::End();
-			}
 		}
 	}
 }

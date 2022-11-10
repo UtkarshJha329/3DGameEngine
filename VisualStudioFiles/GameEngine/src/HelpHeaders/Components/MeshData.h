@@ -21,6 +21,11 @@ struct VAA_Data {
 	const void* offset;
 };
 
+struct AABB {
+	glm::vec3 min;
+	glm::vec3 max;
+};
+
 class CommonMeshData {
 
 public:
@@ -54,10 +59,11 @@ public:
 
 	unsigned int VAO, VBO, EBO;
 
+	AABB aabb;
+
 	std::string meshDataDir = "temp";
 	std::string meshPath = "temp";
-	
-	bool sideloadedMesh = false;
+	std::string meshName = "temp";
 
 	//std::vector<MeshData*>meshes;
 	std::vector<unsigned int>meshEntities;
