@@ -61,6 +61,8 @@ public:
 
 	AABB aabb;
 
+	int verticesSize = 0;
+
 	std::string meshDataDir = "temp";
 	std::string meshPath = "temp";
 	std::string meshName = "temp";

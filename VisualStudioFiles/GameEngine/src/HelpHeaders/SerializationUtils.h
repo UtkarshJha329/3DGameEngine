@@ -17,12 +17,12 @@
 #define DSF(...) DeSerializeArgs(Split(#__VA_ARGS__, ','),__VA_ARGS__)
 #define DSFvecs(...) DeSerializeGlmVec3(Split(#__VA_ARGS__, ','),__VA_ARGS__)
 #define DSFstrs(...) DeSerializeString(Split(#__VA_ARGS__, ','),__VA_ARGS__)
-#define DSFVecIntsT(ignore, x) DeSerializeVecIntsT(x, ignore)
+#define DSFVecIntsT(name, x, size) DeSerializeVecIntsT(x, name, size)
 
 #define SF(dt, ...) SerializeArgs(dt, Split(#__VA_ARGS__, ','),__VA_ARGS__)
 #define SFvecs(...) SerializeGlmVec3(Split(#__VA_ARGS__, ','),__VA_ARGS__)
 #define SFstrs(...) SerializeString(Split(#__VA_ARGS__, ','),__VA_ARGS__)
-#define SFVecIntsT(x) SerializeVecIntsT(x)
+#define SFVecIntsT(x, name) SerializeVecIntsT(x, name)
 
 std::vector<std::string> Split(std::string& str, std::string delim);
 
@@ -102,10 +102,11 @@ static void SerializeGlmVec3(std::vector<std::string> varNamesVec, Vecs... vecs)
 }
 
 template<typename T>
-static void SerializeVecIntsT(std::vector<T>& vec) {
+static void SerializeVecIntsT(std::vector<T>& vec, std::string name) {
 
 	for (int i = 0; i < vec.size(); i++)
 	{
+		RandomProps::curSaveStr += name + " ";
 		RandomProps::curSaveStr += std::to_string(i);
 		RandomProps::curSaveStr += " : ";
 		RandomProps::curSaveStr += std::to_string(vec[i]);
@@ -206,13 +207,13 @@ static void DeSerializeString(std::vector<std::string> varNamesVec, Strs... strs
 
 
 template<typename T>
-static void DeSerializeVecIntsT(std::vector<T>& vec, int ignore) {
+static void DeSerializeVecIntsT(std::vector<T>& vec, std::string name, int size) {
 
 	vec.clear();
 	//std::cout << "Reading Size : " << RandomProps::curCompDeserializationMap.size() - ignore<< std::endl;
-	for (int i = 0; i < RandomProps::curCompDeserializationMap.size() - ignore; i++)
+	for (int i = 0; i < size; i++)
 	{
-		T integer = (T)std::stoi(RandomProps::curCompDeserializationMap[std::to_string(i)]);
+		T integer = (T)std::stoi(RandomProps::curCompDeserializationMap[name + " " + std::to_string(i)]);
 		//std::cout << "INTEGER READ: " << integer << std::endl;
 		vec.push_back(integer);
 	}

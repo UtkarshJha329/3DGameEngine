@@ -108,7 +108,9 @@ void ImguiUISystem::PrepareImguiFrame() {
 
 
 
-			DrawEntityTree(0, &lastSelectedEntity);
+			//DrawEntityTree(0, &lastSelectedEntity);
+			std::vector<bool> shown(curScene->sceneTabler.entity_Set.filledDenseEntities, false);
+			DrawEntityTreeAll(&lastSelectedEntity, shown);
 
 			/*{
 
@@ -429,5 +431,140 @@ void ImguiUISystem::DrawEntityTree(unsigned int entity, unsigned int* lastSelect
 		}
 
 		ImGui::TreePop();
+	}
+}
+
+void ImguiUISystem::DrawEntityTree(unsigned int entity, unsigned int* lastSelectedEntity, std::vector<bool>& drawnEntities)
+{
+	CompSparseSet<ParentChild>* parChi = curScene->GetCompSparseSet<ParentChild>();
+
+	static ImGuiTreeNodeFlags base_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanAvailWidth;
+
+	bool opened = ImGui::TreeNodeEx(std::to_string(entity).c_str(), base_flags);
+	int sparseIndex = curScene->sceneTabler.entity_Set.sparse_Index[entity];
+	drawnEntities[sparseIndex] = true;
+
+	if (ImGui::IsItemClicked())
+	{
+		*lastSelectedEntity = entity;
+	}
+
+	if (opened)
+	{
+		ParentChild* curParChi = &parChi->denseTArray[parChi->sparse_Indecies[entity]];
+		for (int i = 0; i < curParChi->childrenEntity.size(); i++)
+		{
+			ParentChild* childParChi = &parChi->denseTArray[parChi->sparse_Indecies[curParChi->childrenEntity[i]]];
+			int childSparseIndex = curScene->sceneTabler.entity_Set.sparse_Index[childParChi->currentEntity];
+			drawnEntities[childSparseIndex] = true;
+
+			if (childParChi->childrenEntity.size() == 0) {
+				ImGuiTreeNodeFlags node_flags = base_flags;
+				node_flags |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
+
+				ImGui::TreeNodeEx(std::to_string(childParChi->currentEntity).c_str(), node_flags);
+
+				if (ImGui::IsItemClicked())
+				{
+					*lastSelectedEntity = childParChi->currentEntity;
+				}
+			}
+			else {
+				DrawEntityTree(childParChi->currentEntity, lastSelectedEntity, drawnEntities);
+			}
+		}
+
+		ImGui::TreePop();
+	}
+	else {
+		MarkChildShownTrue(entity, drawnEntities);
+	}
+}
+
+void ImguiUISystem::MarkChildShownTrue(unsigned int curEntity, std::vector<bool>& shown) {
+
+	CompSparseSet<ParentChild>* parChi = curScene->GetCompSparseSet<ParentChild>();
+
+	if (parChi->EntityHasComp(curEntity)) {
+		
+		ParentChild* curParChi = &parChi->denseTArray[parChi->sparse_Indecies[curEntity]];
+		unsigned int denseCurEntity = curScene->sceneTabler.entity_Set.sparse_Index[curEntity];
+		shown[denseCurEntity] = true;
+
+		for (int i = 0; i < curParChi->childrenEntity.size(); i++)
+		{
+			MarkChildShownTrue(curParChi->childrenEntity[i], shown);
+		}
+	}
+
+}
+
+void ImguiUISystem::DrawEntityTreeAll(unsigned int* lastSelectedEntity, std::vector<bool>& shown)
+{
+	CompSparseSet<ParentChild>* parChi = curScene->GetCompSparseSet<ParentChild>();
+
+	static ImGuiTreeNodeFlags base_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanAvailWidth;
+	static ImGuiTreeNodeFlags node_flags = base_flags;
+	node_flags |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
+
+	for (int i = 0; i < curScene->sceneTabler.entity_Set.filledDenseEntities; i++)
+	{
+		unsigned int curEntity = curScene->sceneTabler.entity_Set.dense_Entities[i];
+		unsigned int curEntitySparse = curScene->sceneTabler.entity_Set.sparse_Index[curEntity];
+		if (!shown[curEntitySparse]) {
+
+			ParentChild* curParChi = &parChi->denseTArray[parChi->sparse_Indecies[curEntity]];
+			if (curParChi->childrenEntity.size() == 0) {
+
+				ImGui::TreeNodeEx(std::to_string(curEntity).c_str(), node_flags);
+				shown[i] = true;
+
+				if (ImGui::IsItemClicked())
+				{
+					*lastSelectedEntity = curEntity;
+				}
+
+			}
+			else {
+				bool opened = ImGui::TreeNodeEx(std::to_string(curEntity).c_str(), base_flags);
+				shown[i] = true;
+
+				if (ImGui::IsItemClicked())
+				{
+					*lastSelectedEntity = curEntity;
+				}
+
+				if (opened) {
+
+					for (int i = 0; i < curParChi->childrenEntity.size(); i++)
+					{
+						ParentChild* childParChi = &parChi->denseTArray[parChi->sparse_Indecies[curParChi->childrenEntity[i]]];
+						unsigned int denseCurEntity = curScene->sceneTabler.entity_Set.sparse_Index[curParChi->childrenEntity[i]];
+
+						if (childParChi->childrenEntity.size() == 0) {
+
+							ImGui::TreeNodeEx(std::to_string(childParChi->currentEntity).c_str(), node_flags);
+							shown[denseCurEntity] = true;
+
+
+							if (ImGui::IsItemClicked())
+							{
+								*lastSelectedEntity = childParChi->currentEntity;
+							}
+						}
+						else {
+							DrawEntityTree(childParChi->currentEntity, lastSelectedEntity, shown);
+						}
+					}
+
+					ImGui::TreePop();
+
+				}
+				else {
+					MarkChildShownTrue(curEntity, shown);
+				}
+			}
+		}
+
 	}
 }

@@ -12,30 +12,30 @@ public:
 	unsigned int parEntity = 0;
 	unsigned int currentEntity = 0;
 	std::vector<unsigned int> childrenEntity;
-
-	int codedHierarchy = -1;
+	int childrenEntitySize = 0;
 
 	virtual void SerializeComponent() override 
 	{
 		SF(DelimiterType::NEW_LINE, parEntity);
 		SF(DelimiterType::NEW_LINE, currentEntity);
-		//SF(DelimiterType::NEW_LINE, codedHierarchy);
-		SFVecIntsT(childrenEntity);
+		
+		childrenEntitySize = childrenEntity.size();
+		SF(DelimiterType::NEW_LINE, childrenEntitySize);
+		
+		SFVecIntsT(childrenEntity, "child");
 	}
 	virtual void DeSerializeComponent() override
 	{
 		DSF(&parEntity);
 		DSF(&currentEntity);
-		DSFVecIntsT(3, childrenEntity);
+		DSF(&childrenEntitySize);
+		DSFVecIntsT("child", childrenEntity, childrenEntitySize);
 	}
 
 	virtual void UIfyComponent() override 
 	{
 		int parentEntity = (int)parEntity;
 		UIfyInt(parentEntity);
-
-		int saveHierarchy = codedHierarchy;
-		UIfyInt(saveHierarchy);
 
 		float size = childrenEntity.size();
 		UIfyFloat(size);

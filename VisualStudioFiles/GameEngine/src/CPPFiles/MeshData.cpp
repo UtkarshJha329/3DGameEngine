@@ -19,12 +19,19 @@ unsigned int MeshData::mainCameraEntity = 1;
 void MeshData::SerializeComponent()
 {
 	SFstrs(meshPath);
+
+	//verticesSize = vertices.size();
+	//SF(DelimiterType::NEW_LINE, verticesSize);
+	//SFVecIntsT(vertices, "MeshVertices");
 }
 
 void MeshData::DeSerializeComponent()
 {
 	DSFstrs(&meshPath);
 	//DSFVecIntsT(1, vertices);
+	//DSF(&verticesSize);
+	//DSFVecIntsT("MeshVertices", vertices, verticesSize);
+
 }
 
 void MeshData::UIfyComponent()

@@ -53,8 +53,6 @@ void MeshLoadingSystem::Awake()
 	
 	curParChi->currentEntity = RandomProps::particleEntity;
 	curParChi->parEntity = RandomProps::particleEntity;
-	originParChi->childrenEntity.push_back(RandomProps::particleEntity);
-
 
 	curMD->meshPath = "Assets/Models/SimplePlane/SimplePlane.gltf";
 
@@ -165,10 +163,10 @@ void MeshLoadingSystem::ProcessNode(const aiScene* scene, unsigned int curMeshEn
 		ParentChild* child = curScene->GetCompOfEntity<ParentChild>(meshEntityID);
 		child->parEntity = curShader->pairedEntity;
 		child->currentEntity = meshEntityID;
-		child->codedHierarchy = 1;
+
 		ParentChild* parent = curScene->GetCompOfEntity<ParentChild>(curMeshEntity);
 		parent->childrenEntity.push_back(meshEntityID);
-		parent->codedHierarchy = 1;
+
 		//transSet->Add(meshEntityID);
 		//shaderSet->Add(meshEntityID);
 

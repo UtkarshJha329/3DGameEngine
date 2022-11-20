@@ -41,6 +41,9 @@ private:
 	void DrawComponentsOfEntity(unsigned int entity);
 
 	void DrawEntityTree(unsigned int entity, unsigned int* lastSelectedEntity);
+	void DrawEntityTree(unsigned int entity, unsigned int* lastSelectedEntity, std::vector<bool>& drawnEntities);
+	void DrawEntityTreeAll(unsigned int* lastSelectedEntityy, std::vector<bool>& shown);
+	void MarkChildShownTrue(unsigned int curEntity, std::vector<bool>& shown);
 
 private:
 
