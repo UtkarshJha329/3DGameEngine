@@ -9,9 +9,6 @@
 #include "../../HelpHeaders/Light/SpotLight.h"
 #include "../../HelpHeaders/Light/DirectionalLight.h"
 
-ShaderPropertiesSystem::ShaderPropertiesSystem() {
-
-}
 
 void ShaderPropertiesSystem::UnorderedInit() {
 

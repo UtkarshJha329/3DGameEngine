@@ -38,6 +38,8 @@
 
 #include "../HelpHeaders/Systems/ExitToApplicationSystem.h"
 
+#include "../HelpHeaders/Systems/DebugDrawSystem.h"
+
 #pragma endregion
 
 class SceneManager {
@@ -125,7 +127,10 @@ private:
 
 	SerializationSystem serializerSystem;				//8
 
-	ExitToApplicationSystem engineExit;					//9
+	DebugDrawSystem debugDraw;							//9
+
+	ExitToApplicationSystem engineExit;					//10
+
 #pragma endregion
 
 };

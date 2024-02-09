@@ -180,6 +180,7 @@
     <ClInclude Include="src\HelpHeaders\Components\ParticleGroup.h" />
     <ClInclude Include="src\HelpHeaders\Systems\ParticlesManagerSystem.h" />
     <ClInclude Include="src\HelpHeaders\RandomNumber.h" />
+    <ClInclude Include="src\HelpHeaders\Systems\DebugDrawSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CPPFiles\Camera.cpp">
@@ -291,6 +292,7 @@
     <ClCompile Include="src\CPPFiles\SceneManager.cpp" />
     <ClCompile Include="src\CPPFiles\ShaderUtils.cpp" />
     <ClCompile Include="src\CPPFiles\Systems\ParticlesManagerSystem.cpp" />
+    <ClCompile Include="src\CPPFiles\Systems\DebugDrawSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\ObjectShaders\TexturedLit\TexturedLit.frag" />

@@ -1,14 +1,12 @@
 #include "../../HelpHeaders/Systems/MeshLoadingSystem.h"
 
-MeshLoadingSystem::MeshLoadingSystem() {
-
-}
 
 void MeshLoadingSystem::UnorderedInit() {
 
 	archetype.priorityType = HAS_ALL_COMP;
 	archetype.compSparseIdsNdPriority.push_back(MeshData::compSetIndex);
 	archetype.compSparseIdsNdPriority.push_back(Shader::compSetIndex);
+	archetype.compSparseIdsNdPriority.push_back(Transform::compSetIndex);
 
 	systemName = typeid(MeshLoadingSystem).name();
 }
@@ -41,6 +39,7 @@ void MeshLoadingSystem::Awake()
 	}
 
 	RandomProps::particleEntity = curScene->sceneTabler.entity_Set.NewEntity(false);
+	std::cout << "Entity Created ID: " << RandomProps::particleEntity << std::endl;
 
 	curMDSet->Add(RandomProps::particleEntity, false);
 	curShadSet->Add(RandomProps::particleEntity, false);
@@ -62,12 +61,12 @@ void MeshLoadingSystem::Awake()
 	Particle::meshEntity = RandomProps::particleEntity;
 	Particle::shaderEntity = RandomProps::particleEntity;
 
-	LoadModel(RandomProps::particleEntity, curShader);
+	LoadModel(RandomProps::particleEntity, curShader, false);
 
 	auto particleGroupSet = curScene->GetCompSparseSet<ParticleGroup>();
 	for (int i = 0; i < particleGroupSet->DenseSize(); i++)
 	{
-		std::cout << particleGroupSet->denseTArray[i].texturePath << std::endl;
+		std::cout << "Debug: " << particleGroupSet->denseTArray[i].texturePath << std::endl;
 		particleGroupSet->denseTArray[i].textureIndex = LoadParticleTextureToCommonMeshData(particleGroupSet->denseTArray[i].texturePath);
 	}
 
@@ -124,7 +123,7 @@ void MeshLoadingSystem::GenerateABOs(MeshData* meshData, GLsizeiptr bufferSize, 
 	glBindVertexArray(0);
 }
 
-void MeshLoadingSystem::LoadModel(unsigned int curMeshEntity, Shader* curShader)
+void MeshLoadingSystem::LoadModel(unsigned int curMeshEntity, Shader* curShader, bool calculateAABB)
 {
 	Assimp::Importer importer;
 	MeshData* curMesh = curScene->GetCompOfEntity<MeshData>(curMeshEntity);
@@ -137,13 +136,13 @@ void MeshLoadingSystem::LoadModel(unsigned int curMeshEntity, Shader* curShader)
 	}
 
 	curMesh->meshDataDir = curMesh->meshPath.substr(0, curMesh->meshPath.find_last_of('/'));
-	ProcessNode(scene, curMeshEntity, curMesh->meshDataDir, curShader);
+	ProcessNode(scene, curMeshEntity, curMesh->meshDataDir, curShader, calculateAABB);
 	
 	
 	//LoadMeshPreservingHierarchy(scene, scene->mRootNode, curMesh, curMesh->meshDataDir, curShader, curMesh->pairedEntity);
 }
 
-void MeshLoadingSystem::ProcessNode(const aiScene* scene, unsigned int curMeshEntity, std::string curMeshDir, Shader* curShader)
+void MeshLoadingSystem::ProcessNode(const aiScene* scene, unsigned int curMeshEntity, std::string curMeshDir, Shader* curShader, bool calculateAABB)
 {
 	//auto transSet = curScene->GetCompSparseSet<Transform>();
 	//auto shaderSet = curScene->GetCompSparseSet<Shader>();
@@ -156,6 +155,7 @@ void MeshLoadingSystem::ProcessNode(const aiScene* scene, unsigned int curMeshEn
 
 	for (unsigned int i = 0; i < scene->mNumMeshes; i++)
 	{
+		UseShader(curShader);
 		unsigned int meshEntityID = curScene->sceneTabler.entity_Set.NewEntity(false);
 		meshSet->Add(meshEntityID, false);
 		parChi->Add(meshEntityID, false);
@@ -178,7 +178,71 @@ void MeshLoadingSystem::ProcessNode(const aiScene* scene, unsigned int curMeshEn
 		//std::cout << "Pushed new mesh entity : " << meshEntityID << std::endl;
 
 		ProcessMesh(mesh, scene, meshEntityID, curShader, curMeshDir);
+
+		if (calculateAABB)
+		{
+			MeshData* curChildMesh = curScene->GetCompOfEntity<MeshData>(meshEntityID);
+			Transform* curTrans = curScene->GetCompOfEntity<Transform>(curMeshEntity);
+
+			//std::cout << "Max : " << curChildMesh->aabb.max.x << " : " << curChildMesh->aabb.max.y << " : " << curChildMesh->aabb.max.z << std::endl;
+			//std::cout << "Min : " << curChildMesh->aabb.min.x << " : " << curChildMesh->aabb.min.y << " : " << curChildMesh->aabb.min.z << std::endl;
+
+
+			curChildMesh->aabb.max = glm::vec4(curChildMesh->aabb.max, 1.0f);
+			curChildMesh->aabb.min = glm::vec4(curChildMesh->aabb.min, 1.0f);
+
+			float p1[3] = { curChildMesh->aabb.min.x, curChildMesh->aabb.min.y, curChildMesh->aabb.min.z };
+			float p2[3] = { curChildMesh->aabb.max.x, curChildMesh->aabb.max.y, curChildMesh->aabb.max.z };
+
+			float* topBackRight = p2;										//1
+			float* topFrontRight = new float[3]{p1[0], p2[1], p2[2]};		//2
+			float* topBackLeft = new float[3]{p2[0], p2[1], p1[2]};			//3
+			float* topFrontLeft = new float[3]{p1[0], p2[1], p1[2]};		//3
+			float* bottomBackRight = new float[3]{p2[0], p1[1], p2[2]};		//5
+			float* bottomFrontRight = new float[3]{ p1[0], p1[1], p2[2] };	//6
+			float* bottomBackLeft = new float[3]{ p2[0], p1[1], p1[2] };	//7
+			float* bottomFrontLeft = p1;									//8
+
+			AddElementsToVec(curChildMesh->aabb.bbcoords, topBackRight);
+			AddElementsToVec(curChildMesh->aabb.bbcoords, topFrontRight);
+			AddElementsToVec(curChildMesh->aabb.bbcoords, topBackLeft);
+			AddElementsToVec(curChildMesh->aabb.bbcoords, topFrontLeft);
+			AddElementsToVec(curChildMesh->aabb.bbcoords, bottomBackRight);
+			AddElementsToVec(curChildMesh->aabb.bbcoords, bottomFrontRight);
+			AddElementsToVec(curChildMesh->aabb.bbcoords, bottomBackLeft);
+			AddElementsToVec(curChildMesh->aabb.bbcoords, bottomFrontLeft);
+
+			/*for (unsigned int i = 0; i < curChildMesh->aabb.bbcoords.size(); i++)
+			{
+				std::cout << i << " : " << curChildMesh->aabb.bbcoords[i] << std::endl;
+			}*/
+
+			curChildMesh->aabb.debugShader = new DebugShader(glm::vec3(1.0f, 0.0f, 1.0f), curChildMesh->aabb.bbcoords, curChildMesh->aabb.indices);
+
+			/*glGenVertexArrays(1, &curChildMesh->aabb.VAO);
+			glGenBuffers(1, &curChildMesh->aabb.VBO);
+			glGenBuffers(1, &curChildMesh->aabb.EBO);
+
+			glBindVertexArray(curChildMesh->aabb.VAO);
+			glBindBuffer(GL_ARRAY_BUFFER, curChildMesh->aabb.VBO);
+
+			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 24, curChildMesh->aabb.bbcoords.data(), GL_STATIC_DRAW);
+
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, curChildMesh->aabb.EBO);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, 36 * sizeof(unsigned int), curChildMesh->aabb.indices, GL_STATIC_DRAW);
+
+			glVertexAttribPointer(curChildMesh->aabb.VAA, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+			glEnableVertexAttribArray(curChildMesh->aabb.VAA);
+
+			glBindVertexArray(0);*/
+		}
 	}
+}
+
+void MeshLoadingSystem::AddElementsToVec(std::vector<float> &a, float* toAdd) {
+	a.push_back(toAdd[0]);
+	a.push_back(toAdd[1]);
+	a.push_back(toAdd[2]);
 }
 
 //
@@ -368,6 +432,10 @@ void MeshLoadingSystem::ProcessMesh(aiMesh* mesh, const aiScene* scene, unsigned
 
 	//std::cout << mesh->mName.C_Str() << std::endl;
 	meshN->meshName = mesh->mName.C_Str();
+
+	//std::cout << "COPIED: " << "Max : " << meshN->aabb.max.x << " : " << meshN->aabb.max.y << " : " << meshN->aabb.max.z << std::endl;
+	//std::cout << "COPIED: " << "Min : " << meshN->aabb.min.x << " : " << meshN->aabb.min.y << " : " << meshN->aabb.min.z << std::endl;
+
 }
 
 

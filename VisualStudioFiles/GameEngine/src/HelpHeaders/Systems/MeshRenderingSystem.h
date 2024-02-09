@@ -16,7 +16,9 @@
 class MeshRenderingSystem : public System {
 
 public:
-	MeshRenderingSystem();
+	MeshRenderingSystem() {
+        systemName = typeid(MeshRenderingSystem).name();
+    }
 
 	void UnorderedInit() override;
 	void PreAwake() override {}
@@ -28,7 +30,7 @@ public:
 
 private:
 
-	void DrawMeshTotal(MeshData* curMeshData, Shader* curShader, int entity = -1);
+	void DrawMeshTotal(MeshData* curMeshData, Shader* curShader, Transform* curTrans, int entity = -1);
 	void DrawParticleTotal(MeshData* curMeshData, Shader* curShader, int textureIndex, int entity = -1);
 	void BindTexturesWithIndecies(MeshData* curMeshdata, Shader* parShader);
 	void DrawMeshElements(MeshData* meshdata, Shader* parShader);
@@ -36,8 +38,6 @@ private:
 
 	void DrawMeshesPassOne(CameraComponent* curCam);
 
-	void DrawMeshBackDepthPass(CameraComponent* curCam);
-	void DrawMeshFrontDepthPass(CameraComponent* curCam);
 	void DrawMeshTotalPlain(MeshData* curMeshData, Shader* curShader);
 	void DrawMeshElementsPlain(MeshData* meshdata, Shader* parShader);
 

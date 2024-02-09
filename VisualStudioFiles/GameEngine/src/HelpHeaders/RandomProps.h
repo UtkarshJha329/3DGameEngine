@@ -29,4 +29,6 @@ public:
 
 	inline static bool createNewEntitySelectable = false;
 
+	inline static unsigned int lastSelectedEntity = 0;
+
 };

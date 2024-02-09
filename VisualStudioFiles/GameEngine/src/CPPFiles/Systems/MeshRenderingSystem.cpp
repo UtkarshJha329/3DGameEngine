@@ -1,8 +1,5 @@
 #include "../../HelpHeaders/Systems/MeshRenderingSystem.h"
 
-MeshRenderingSystem::MeshRenderingSystem() {
-
-}
 
 void MeshRenderingSystem::UnorderedInit()
 {
@@ -79,7 +76,7 @@ void MeshRenderingSystem::DrawMeshesPassOne(CameraComponent* curCam) {
 		//glBindTexture(GL_TEXTURE_2D, curCam->depthTextureBackID);
 
 
-		DrawMeshTotal(&curMDS->denseTArray[i], &shadSet->denseTArray[i]);
+		DrawMeshTotal(&curMDS->denseTArray[i], &shadSet->denseTArray[i], &transSet->denseTArray[i]);
 	}
 
 	auto particleGroupSet = curScene->GetCompSparseSet<ParticleGroup>();
@@ -113,7 +110,7 @@ void MeshRenderingSystem::DrawMeshesPassOne(CameraComponent* curCam) {
 				//curTransform->PrintTransformMat();
 
 				if (particleGroupSet->denseTArray[i].textureIndex == -1) {
-					DrawMeshTotal(curMD, curShader, particleGroupSet->denseTArray[i].pairedEntity);
+					DrawMeshTotal(curMD, curShader, curTransform, particleGroupSet->denseTArray[i].pairedEntity);
 				}
 				else {
 					DrawParticleTotal(curMD, curShader, particleGroupSet->denseTArray[i].textureIndex, particleGroupSet->denseTArray[i].pairedEntity);
@@ -148,62 +145,6 @@ glm::mat4 MeshRenderingSystem::WorldTransform(glm::mat4* childTrans, unsigned in
 
 	//return nullptr;
 }
-
-void MeshRenderingSystem::DrawMeshFrontDepthPass(CameraComponent* curCam) {
-
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, curCam->FBO_FrontDepthPass);
-	glEnable(GL_DEPTH_TEST);
-	//glDepthMask(GL_FALSE);
-
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	CompSparseSet<MeshData>* curMDS = curScene->GetCompSparseSet<MeshData>();
-	CompSparseSet<Transform>* curTrans = curScene->GetCompSparseSet<Transform>();
-	CompSparseSet<Shader>* curShad = curScene->GetCompSparseSet<Shader>();
-	//std::cout << curSmallestSetSize << ", " << Tabler::Comp_Set<MeshData>.denseTArray.size() << std::endl;
-	UseShader(curScene->tempDepthShad);
-
-	for (int i = 0; i < curSmallestSetSize; i++)
-	{
-		setMat4(curScene->tempDepthShad, "transform", curTrans->denseTArray[i].CalculateTransformMatr());
-		DrawMeshTotalPlain(&curMDS->denseTArray[i], curScene->tempDepthShad);
-	}
-
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-}
-
-void MeshRenderingSystem::DrawMeshBackDepthPass(CameraComponent* curCam) {
-
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_FRONT);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, curCam->FBO_BackDepthPass);
-	glEnable(GL_DEPTH_TEST);
-	//glDepthMask(GL_FALSE);
-
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	CompSparseSet<MeshData>* curMDS = curScene->GetCompSparseSet<MeshData>();
-	CompSparseSet<Transform>* curTrans = curScene->GetCompSparseSet<Transform>();
-	CompSparseSet<Shader>* curShad = curScene->GetCompSparseSet<Shader>();
-	//std::cout << curSmallestSetSize << ", " << Tabler::Comp_Set<MeshData>.denseTArray.size() << std::endl;
-	UseShader(curScene->tempDepthShad);
-
-	for (int i = 0; i < curSmallestSetSize; i++)
-	{
-		setMat4(curScene->tempDepthShad, "transform", curTrans->denseTArray[i].CalculateTransformMatr());
-		DrawMeshTotalPlain(&curMDS->denseTArray[i], curScene->tempDepthShad);
-	}
-
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-}
-
-
 
 void MeshRenderingSystem::DrawMeshElements(MeshData* meshdata, Shader *parShader)
 {
@@ -279,7 +220,7 @@ void MeshRenderingSystem::BindTexturesWithIndecies(MeshData *curMeshData, Shader
 	}
 }
 
-void MeshRenderingSystem::DrawMeshTotal(MeshData* curMeshData, Shader* curShader, int entity)
+void MeshRenderingSystem::DrawMeshTotal(MeshData* curMeshData, Shader* curShader, Transform* curTrans, int entity)
 {
 	//std::cout << MeshData::loadedTextures.size() << std::endl;
 	//std::cout << curMeshData->meshes.size() << std::endl;

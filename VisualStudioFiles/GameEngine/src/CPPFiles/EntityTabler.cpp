@@ -39,6 +39,8 @@ unsigned int EntitySparseSet::NewEntity(bool _serializable) {
 	entity_Alive.emplace_back(true);
 	entity_serializable.emplace_back(_serializable);
 
+	//std::cout << "Entity ID: " << entity << std::endl;
+
 	return entity;
 
 }

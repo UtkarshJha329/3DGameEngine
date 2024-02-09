@@ -17,7 +17,9 @@
 class MeshLoadingSystem : public System {
 
 public:
-	MeshLoadingSystem();
+	MeshLoadingSystem() {
+		systemName = typeid(MeshLoadingSystem).name();
+	}
 
 	void UnorderedInit() override;
 	void PreAwake() override;
@@ -31,9 +33,9 @@ private:
 
 	void GenerateABOs(MeshData* meshData, GLsizeiptr bufferSize, Shader* curShader);
 
-	void LoadModel(unsigned int curMeshEntity, Shader* curShader);
+	void LoadModel(unsigned int curMeshEntity, Shader* curShader, bool calculateAABB = true);
 
-	void ProcessNode(const aiScene* scene, unsigned int curMeshEntity, std::string curMeshDir, Shader* curShader);
+	void ProcessNode(const aiScene* scene, unsigned int curMeshEntity, std::string curMeshDir, Shader* curShader, bool calculateAABB = true);
 	void ProcessMesh(aiMesh* mesh, const aiScene* scene, MeshData* meshN, Shader* curShader, std::string meshDataDir);
 	void ProcessMesh(aiMesh* mesh, const aiScene* scene, unsigned int meshEntity, Shader* curShader, std::string meshDataDir);
 	std::vector<unsigned int> LoadMaterialTextures(aiMaterial* mat, aiTextureType type, TextureType typeName, std::string curMeshDataDir);
@@ -41,6 +43,8 @@ private:
 	int LoadParticleTextureToCommonMeshData(std::string path);
 
 	void FreeStuff(MeshData* curMeshData);
+
+	void MeshLoadingSystem::AddElementsToVec(std::vector<float>& a, float* toAdd);
 
 	std::vector<std::vector<std::pair<size_t, std::string>>> loadedModelPaths;
 

@@ -1,0 +1,379 @@
+Number of Entities Alive : 11
+
+class Transform : 10 : oooooooooox
+
+position : 40.052059 16.298733 -0.868999 
+rotation : -9.023963 -269.902466 0.000000 
+scale : 1.000000 1.000000 1.000000 
+entity : 1
+
+position : -20.200001 0.000000 0.000000 
+rotation : 0.000000 90.000000 0.000000 
+scale : 1.000000 1.000000 1.000000 
+entity : 3
+
+position : 0.000000 0.000000 0.000000 
+rotation : 0.000000 0.000000 0.000000 
+scale : 1.000000 1.000000 1.000000 
+entity : 0
+
+position : 0.000000 0.000000 2.500000 
+rotation : 0.000000 0.000000 0.000000 
+scale : 0.100000 0.100000 0.100000 
+entity : 2
+
+position : -1.000000 5.000000 20.000000 
+rotation : 0.000000 0.000000 0.000000 
+scale : 1.000000 1.000000 1.000000 
+entity : 4
+
+position : -1.000000 3.000000 10.000000 
+rotation : 0.000000 0.000000 0.000000 
+scale : 1.000000 1.000000 1.000000 
+entity : 5
+
+position : -1.000000 2.500000 0.000000 
+rotation : 0.000000 0.000000 0.000000 
+scale : 1.000000 1.000000 1.000000 
+entity : 6
+
+position : -1.000000 3.000000 -10.000000 
+rotation : 0.000000 0.000000 0.000000 
+scale : 1.000000 1.000000 1.000000 
+entity : 7
+
+position : -1.000000 5.000000 -20.000000 
+rotation : 0.000000 0.000000 0.000000 
+scale : 1.000000 1.000000 1.000000 
+entity : 8
+
+position : 1.000000 1.000000 10.000000 
+rotation : 0.000000 0.000000 0.000000 
+scale : 1.000000 1.000000 1.000000 
+entity : 9
+
+
+---------------------------------------------------------------------
+class Shader : 2 : xxooxxxxxxx
+
+entity : 2
+
+entity : 3
+
+
+---------------------------------------------------------------------
+class MeshData : 2 : xxooxxxxxxx
+
+meshPath : Assets/Models/glTF-Sample-Models-master/glTF-Sample-Models-master/2.0/Sponza/glTF/Sponza.gltf
+entity : 2
+
+meshPath : Assets/Models/crysis_nano_suit_2/scene.gltf
+entity : 3
+
+
+---------------------------------------------------------------------
+class CameraComponent : 1 : xoxxxxxxxxx
+
+projectionValue : 0
+entity : 1
+
+
+---------------------------------------------------------------------
+class ParentChild : 11 : ooooooooooo
+
+parEntity : 0
+currentEntity : 0
+childrenEntitySize : 9
+child 0 : 1
+child 1 : 2
+child 2 : 3
+child 3 : 4
+child 4 : 5
+child 5 : 6
+child 6 : 7
+child 7 : 9
+child 8 : 120
+entity : 0
+
+parEntity : 0
+currentEntity : 1
+childrenEntitySize : 0
+entity : 1
+
+parEntity : 0
+currentEntity : 2
+childrenEntitySize : 103
+child 0 : 11
+child 1 : 12
+child 2 : 13
+child 3 : 14
+child 4 : 15
+child 5 : 16
+child 6 : 17
+child 7 : 18
+child 8 : 19
+child 9 : 20
+child 10 : 21
+child 11 : 22
+child 12 : 23
+child 13 : 24
+child 14 : 25
+child 15 : 26
+child 16 : 27
+child 17 : 28
+child 18 : 29
+child 19 : 30
+child 20 : 31
+child 21 : 32
+child 22 : 33
+child 23 : 34
+child 24 : 35
+child 25 : 36
+child 26 : 37
+child 27 : 38
+child 28 : 39
+child 29 : 40
+child 30 : 41
+child 31 : 42
+child 32 : 43
+child 33 : 44
+child 34 : 45
+child 35 : 46
+child 36 : 47
+child 37 : 48
+child 38 : 49
+child 39 : 50
+child 40 : 51
+child 41 : 52
+child 42 : 53
+child 43 : 54
+child 44 : 55
+child 45 : 56
+child 46 : 57
+child 47 : 58
+child 48 : 59
+child 49 : 60
+child 50 : 61
+child 51 : 62
+child 52 : 63
+child 53 : 64
+child 54 : 65
+child 55 : 66
+child 56 : 67
+child 57 : 68
+child 58 : 69
+child 59 : 70
+child 60 : 71
+child 61 : 72
+child 62 : 73
+child 63 : 74
+child 64 : 75
+child 65 : 76
+child 66 : 77
+child 67 : 78
+child 68 : 79
+child 69 : 80
+child 70 : 81
+child 71 : 82
+child 72 : 83
+child 73 : 84
+child 74 : 85
+child 75 : 86
+child 76 : 87
+child 77 : 88
+child 78 : 89
+child 79 : 90
+child 80 : 91
+child 81 : 92
+child 82 : 93
+child 83 : 94
+child 84 : 95
+child 85 : 96
+child 86 : 97
+child 87 : 98
+child 88 : 99
+child 89 : 100
+child 90 : 101
+child 91 : 102
+child 92 : 103
+child 93 : 104
+child 94 : 105
+child 95 : 106
+child 96 : 107
+child 97 : 108
+child 98 : 109
+child 99 : 110
+child 100 : 111
+child 101 : 112
+child 102 : 113
+entity : 2
+
+parEntity : 0
+currentEntity : 3
+childrenEntitySize : 6
+child 0 : 114
+child 1 : 115
+child 2 : 116
+child 3 : 117
+child 4 : 118
+child 5 : 119
+entity : 3
+
+parEntity : 0
+currentEntity : 4
+childrenEntitySize : 0
+entity : 4
+
+parEntity : 0
+currentEntity : 5
+childrenEntitySize : 0
+entity : 5
+
+parEntity : 0
+currentEntity : 6
+childrenEntitySize : 0
+entity : 6
+
+parEntity : 0
+currentEntity : 7
+childrenEntitySize : 0
+entity : 7
+
+parEntity : 0
+currentEntity : 8
+childrenEntitySize : 0
+entity : 8
+
+parEntity : 0
+currentEntity : 9
+childrenEntitySize : 1
+child 0 : 10
+entity : 9
+
+parEntity : 9
+currentEntity : 10
+childrenEntitySize : 0
+entity : 10
+
+
+---------------------------------------------------------------------
+class Particle : 0 : xxxxxxxxxxx
+
+
+---------------------------------------------------------------------
+class ParticleGroup : 5 : xxxxoooooxx
+
+totalNumberOfParticles : 1
+numberOfParticlesPerSecond : 1
+particleLifeTime : 1000.000000
+particleSpeed : 0.000000
+scale : 1.000000
+coneInverseAngle : 1.570796
+loop : 1
+texturePath : Assets/EditorResources/Icons/Billboards/lightbulb.png
+entity : 4
+
+totalNumberOfParticles : 1
+numberOfParticlesPerSecond : 1
+particleLifeTime : 1000.000000
+particleSpeed : 0.000000
+scale : 1.000000
+coneInverseAngle : 1.570796
+loop : 1
+texturePath : Assets/EditorResources/Icons/Billboards/lightbulb.png
+entity : 5
+
+totalNumberOfParticles : 1
+numberOfParticlesPerSecond : 1
+particleLifeTime : 1000.000000
+particleSpeed : 0.000000
+scale : 1.000000
+coneInverseAngle : 1.570796
+loop : 1
+texturePath : Assets/EditorResources/Icons/Billboards/lightbulb.png
+entity : 6
+
+totalNumberOfParticles : 1
+numberOfParticlesPerSecond : 1
+particleLifeTime : 1000.000000
+particleSpeed : 0.000000
+scale : 1.000000
+coneInverseAngle : 1.570796
+loop : 1
+texturePath : Assets/EditorResources/Icons/Billboards/lightbulb.png
+entity : 7
+
+totalNumberOfParticles : 1
+numberOfParticlesPerSecond : 1
+particleLifeTime : 1000.000000
+particleSpeed : 0.000000
+scale : 1.000000
+coneInverseAngle : 1.570796
+loop : 1
+texturePath : Assets/EditorResources/Icons/Billboards/lightbulb.png
+entity : 8
+
+
+---------------------------------------------------------------------
+class PointLight : 5 : xxxxoooooxx
+
+ambient : 0.100000 0.100000 0.100000 
+diffuse : 0.000000 0.400000 0.000000 
+specular : 1.000000 1.000000 1.000000 
+radius : 30.000000
+entity : 4
+
+ambient : 0.100000 0.100000 0.100000 
+diffuse : 0.000000 0.400000 0.000000 
+specular : 1.000000 1.000000 1.000000 
+radius : 30.000000
+entity : 5
+
+ambient : 0.100000 0.100000 0.100000 
+diffuse : 0.000000 0.400000 0.000000 
+specular : 1.000000 1.000000 1.000000 
+radius : 30.000000
+entity : 6
+
+ambient : 0.100000 0.100000 0.100000 
+diffuse : 0.000000 0.400000 0.000000 
+specular : 1.000000 1.000000 1.000000 
+radius : 30.000000
+entity : 7
+
+ambient : 0.100000 0.100000 0.100000 
+diffuse : 0.000000 0.400000 0.000000 
+specular : 1.000000 1.000000 1.000000 
+radius : 30.000000
+entity : 8
+
+
+---------------------------------------------------------------------
+class SpotLight : 0 : xxxxxxxxxxx
+
+
+---------------------------------------------------------------------
+class DirectionalLight : 1 : xxxxxxxxxox
+
+ambient : 0.100000 0.100000 0.100000 
+diffuse : 0.700000 0.700000 0.800000 
+specular : 1.000000 1.000000 1.000000 
+direction : -1.000000 -1.000000 -1.000000 
+entity : 9
+
+
+---------------------------------------------------------------------
+class TestComp : 1 : xoxxxxxxxxx
+
+entity : 1
+
+
+---------------------------------------------------------------------
+class CameraMovementComponent : 1 : xoxxxxxxxxx
+
+cameraMvSpeed : 20.000000
+sensitivity : 3.000000
+entity : 1
+
+
+---------------------------------------------------------------------

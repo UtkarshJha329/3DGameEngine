@@ -79,14 +79,10 @@ void CameraHandelingSystem::CreateCameraFrameBuffers() {
 
 void CameraHandelingSystem::CreateCameraFrameBufSpecific(CameraComponent* curComp) {
 
-	std::cout << curComp->FBO << std::endl;
 	glGenFramebuffers(1, &(curComp->FBO));
-	glGenFramebuffers(1, &(curComp->FBO_FrontDepthPass));
-	glGenFramebuffers(1, &(curComp->FBO_BackDepthPass));
 	std::cout << "FBO CREATED." << std::endl;
 	glGenRenderbuffers(1, &(curComp->RBO));
-	glGenRenderbuffers(1, &(curComp->RBO_FrontDepthPass));
-	glGenRenderbuffers(1, &(curComp->RBO_BackDepthPass));
+	std::cout << "RBO CREATED." << std::endl;
 }
 
 void CameraHandelingSystem::SetCameraFrameBuffers(float width, float height) {
@@ -142,43 +138,6 @@ void CameraHandelingSystem::SetCameraFrameBuffers(float width, float height) {
 		std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-
-	glBindFramebuffer(GL_FRAMEBUFFER, mainCam->FBO_FrontDepthPass);
-
-	glGenTextures(1, &(mainCam->depthTextureFrontID));
-	glBindTexture(GL_TEXTURE_2D, mainCam->depthTextureFrontID);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mainCam->depthTextureFrontID, 0);
-
-	glBindRenderbuffer(GL_RENDERBUFFER, mainCam->RBO_FrontDepthPass);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, mainCam->RBO_FrontDepthPass);
-
-	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-		std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-
-	glBindFramebuffer(GL_FRAMEBUFFER, mainCam->FBO_BackDepthPass);
-
-	glGenTextures(1, &(mainCam->depthTextureBackID));
-	glBindTexture(GL_TEXTURE_2D, mainCam->depthTextureBackID);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mainCam->depthTextureBackID, 0);
-
-	glBindRenderbuffer(GL_RENDERBUFFER, mainCam->RBO_BackDepthPass);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, mainCam->RBO_BackDepthPass);
-
-	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-		std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-
 }
 
 void CameraHandelingSystem::ClearCameraBuffers() {
@@ -195,16 +154,10 @@ void CameraHandelingSystem::ClearCameraBuffers() {
 
 void CameraHandelingSystem::ClearCameraBufSpecific(CameraComponent* curComp) {
 	glDeleteRenderbuffers(1, &(curComp->RBO));
-	glDeleteRenderbuffers(1, &(curComp->RBO_FrontDepthPass));
-	glDeleteRenderbuffers(1, &(curComp->RBO_BackDepthPass));
 	std::cout << "DELETED RBO" << std::endl;
 	glDeleteTextures(1, &(curComp->renderTextureID));
-	glDeleteTextures(1, &(curComp->depthTextureFrontID));
-	glDeleteTextures(1, &(curComp->depthTextureBackID));
 	glDeleteTextures(1, &(curComp->entityColourTextureID));
 	glDeleteFramebuffers(1, &(curComp->FBO));
-	glDeleteFramebuffers(1, &(curComp->FBO_FrontDepthPass));
-	glDeleteFramebuffers(1, &(curComp->FBO_BackDepthPass));
 
 
 }

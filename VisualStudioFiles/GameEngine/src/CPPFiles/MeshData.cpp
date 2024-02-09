@@ -38,4 +38,5 @@ void MeshData::UIfyComponent()
 {
 	UIfyString(meshPath);
 	UIfyString(meshName);
+	UIfyVec3(aabb.min, aabb.max);
 }

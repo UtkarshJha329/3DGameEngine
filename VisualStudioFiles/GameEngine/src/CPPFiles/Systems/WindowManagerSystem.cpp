@@ -1,8 +1,5 @@
 #include "../../HelpHeaders/Systems/WindowManagerSystem.h"
 
-WindowManagerSystem::WindowManagerSystem() {
-
-}
 
 void WindowManagerSystem::PreAwake() {}
 

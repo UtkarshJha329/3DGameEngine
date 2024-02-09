@@ -125,6 +125,7 @@
     <ClInclude Include="src\HelpHeaders\SoraApplication.h" />
     <ClInclude Include="src\HelpHeaders\SparseOctree.h" />
     <ClInclude Include="src\HelpHeaders\Systems\CameraHandelingSystem.h" />
+    <ClInclude Include="src\HelpHeaders\Systems\DebugDrawSystem.h" />
     <ClInclude Include="src\HelpHeaders\Systems\ExitToApplicationSystem.h" />
     <ClInclude Include="src\HelpHeaders\Systems\ImguiUISystem.h" />
     <ClInclude Include="src\HelpHeaders\Systems\InputHandlingSystem.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="src\CPPFiles\ShaderUtils.cpp" />
     <ClCompile Include="src\CPPFiles\SoraApplication.cpp" />
     <ClCompile Include="src\CPPFiles\Systems\CameraHandelingSystem.cpp" />
+    <ClCompile Include="src\CPPFiles\Systems\DebugDrawSystem.cpp" />
     <ClCompile Include="src\CPPFiles\Systems\ExitToApplicationSystem.cpp" />
     <ClCompile Include="src\CPPFiles\Systems\ImguiUISystem.cpp" />
     <ClCompile Include="src\CPPFiles\Systems\InputHandlingSystem.cpp" />

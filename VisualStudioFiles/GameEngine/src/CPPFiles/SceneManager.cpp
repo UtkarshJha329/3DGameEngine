@@ -26,7 +26,7 @@ void SceneManager::PrintSystemNames() {
 
 	for (int i = 0; i < SystemsManager::Instance()->systems.size(); i++)
 	{
-		std::cout << SystemsManager::Instance()->systems[i]->systemName << std::endl;
+		std::cout << "ADDED SYSTEMS: " << SystemsManager::Instance()->systems[i]->systemName << std::endl;
 	}
 
 	PrintAppSystemNames();

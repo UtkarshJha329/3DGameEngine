@@ -16,6 +16,10 @@ class ParticlesManagerSystem : public System {
 
 public:
 
+	ParticlesManagerSystem() {
+		systemName = typeid(ParticlesManagerSystem).name();
+	}
+
 	void UnorderedInit() override;
 	void PreAwake() override;
 	void Awake() override;

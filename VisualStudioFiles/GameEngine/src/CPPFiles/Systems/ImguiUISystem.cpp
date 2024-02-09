@@ -50,30 +50,6 @@ void ImguiUISystem::InitialiseImGUI() {
 	ImGui_ImplOpenGL3_Init("#version 150");
 }
 
-void checkCompileErrors(unsigned int shader, std::string type)
-{
-	int success;
-	char infoLog[1024];
-	if (type != "PROGRAM")
-	{
-		glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-		if (!success)
-		{
-			glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-			std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
-		}
-	}
-	else
-	{
-		glGetProgramiv(shader, GL_LINK_STATUS, &success);
-		if (!success)
-		{
-			glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-			std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
-		}
-	}
-}
-
 void ImguiUISystem::PrepareImguiFrame() {
 
 	Tabler* curSceneTabler = &(Scene::curScene->sceneTabler);
@@ -89,6 +65,17 @@ void ImguiUISystem::PrepareImguiFrame() {
 		ImGui::ShowDemoWindow(&showDemoWindow);
 
 		ImGui::DockSpaceOverViewport();
+
+		{
+			ImGui::Begin("Systems Traversal Order");
+
+			for (int i : SystemsManager::Instance()->systemsTraversOrderIndex) {
+				ImGui::TreeNodeEx(SystemsManager::Instance()->systems[i]->systemName.c_str()
+					, ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_Framed);
+			}
+
+			ImGui::End();
+		}
 
 		{
 
@@ -238,7 +225,7 @@ void ImguiUISystem::PrepareImguiFrame() {
 				//std::cout << mouseX << " : " << mouseY << std::endl;
 				CameraComponent* mainCam = curScene->GetCompOfEntity<CameraComponent>(CameraComponent::mainCameraEntity);
 
-				if (ImGui::IsMouseDown(0)
+				if (ImGui::IsMouseClicked(0)
 					&& mouseX >= 0 
 					&& mouseY >= 0 
 					&& mouseX < (int)s_viewportSize.x 
@@ -251,6 +238,7 @@ void ImguiUISystem::PrepareImguiFrame() {
 					std::cout << "Mouse over entity : " << mainCam->entityFromTexture << std::endl;
 					glBindFramebuffer(GL_FRAMEBUFFER, 0);
 					lastSelectedEntity = mainCam->entityFromTexture;
+					RandomProps::lastSelectedEntity = mainCam->entityFromTexture;
 				}
 
 
@@ -399,7 +387,8 @@ void ImguiUISystem::DrawEntityTree(unsigned int entity, unsigned int* lastSelect
 {
 	CompSparseSet<ParentChild>* parChi = curScene->GetCompSparseSet<ParentChild>();
 
-	static ImGuiTreeNodeFlags base_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanAvailWidth;
+	static ImGuiTreeNodeFlags base_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick
+		| ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_Framed;
 
 	bool opened = ImGui::TreeNodeEx(std::to_string(entity).c_str(), base_flags);
 	
@@ -438,7 +427,9 @@ void ImguiUISystem::DrawEntityTree(unsigned int entity, unsigned int* lastSelect
 {
 	CompSparseSet<ParentChild>* parChi = curScene->GetCompSparseSet<ParentChild>();
 
-	static ImGuiTreeNodeFlags base_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanAvailWidth;
+	static ImGuiTreeNodeFlags base_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick
+		| ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_Framed;
+
 
 	bool opened = ImGui::TreeNodeEx(std::to_string(entity).c_str(), base_flags);
 	int sparseIndex = curScene->sceneTabler.entity_Set.sparse_Index[entity];
@@ -503,7 +494,8 @@ void ImguiUISystem::DrawEntityTreeAll(unsigned int* lastSelectedEntity, std::vec
 {
 	CompSparseSet<ParentChild>* parChi = curScene->GetCompSparseSet<ParentChild>();
 
-	static ImGuiTreeNodeFlags base_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanAvailWidth;
+	static ImGuiTreeNodeFlags base_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick
+		| ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_Framed;
 	static ImGuiTreeNodeFlags node_flags = base_flags;
 	node_flags |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
 

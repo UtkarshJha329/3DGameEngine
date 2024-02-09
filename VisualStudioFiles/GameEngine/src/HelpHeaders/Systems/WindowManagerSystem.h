@@ -13,7 +13,9 @@ class WindowManagerSystem : public System {
 
 public:
 	
-	WindowManagerSystem();
+	WindowManagerSystem() {
+		systemName = typeid(WindowManagerSystem).name();
+	}
 
 	bool SetupWindow(std::string windowName);
 

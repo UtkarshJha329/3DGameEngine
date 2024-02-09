@@ -37,9 +37,6 @@ public:
 	unsigned int renderTextureID = 0;
 	unsigned int entityColourTextureID = 0;
 
-	unsigned int entityTextureID = 0;
-	unsigned int depthTextureFrontID = 0;
-	unsigned int depthTextureBackID = 0;
 	unsigned int entityIDTextureID = 0;
 
 	int entityFromTexture = -1;
@@ -54,12 +51,6 @@ private:
 
 	unsigned int FBO_PickingColour = 0;
 	unsigned int RBO_PickingColour = 0;
-
-	unsigned int FBO_FrontDepthPass = 0;
-	unsigned int RBO_FrontDepthPass = 0;
-
-	unsigned int FBO_BackDepthPass = 0;
-	unsigned int RBO_BackDepthPass = 0;
 
 	glm::mat4 view = glm::mat4(1.0f);
 };

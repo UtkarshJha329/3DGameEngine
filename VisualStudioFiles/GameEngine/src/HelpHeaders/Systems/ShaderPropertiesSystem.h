@@ -9,7 +9,9 @@ class ShaderPropertiesSystem : public System {
 
 public:
 
-	ShaderPropertiesSystem();
+	ShaderPropertiesSystem() {
+		systemName = typeid(ShaderPropertiesSystem).name();
+	}
 
 	void UnorderedInit() override;
 	void PreAwake() override {}
